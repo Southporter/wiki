@@ -8,7 +8,7 @@ After listening to [this podcast](https://corecursive.com/029-learn-to-think-and
 
 ###### Table of Contents
 
-[Books](./Books/index.md)
-[Rust](./Rust/index.md)
+[Books](./Books/BooksToRead.md)
 
+[Rust](./Rust/index.md)
 
