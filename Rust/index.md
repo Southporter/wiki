@@ -4,5 +4,5 @@
 
 ###### Table of Contents
 
-[Cheatsheet]: cheatsheet.md
+[Cheatsheet](./cheatsheet.md)
 

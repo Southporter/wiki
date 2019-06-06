@@ -78,4 +78,4 @@ impl IpAddr {
 
 ###### Links
 
-[1](https://doc.rust-lang.org/book/ch06-01-defining-an-enum.html)
+[1]: https://doc.rust-lang.org/book/ch06-01-defining-an-enum.html
