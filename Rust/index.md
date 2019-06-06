@@ -1,6 +1,4 @@
-# Rust
-
-
+# Rust :gear:
 
 ###### Table of Contents
 
