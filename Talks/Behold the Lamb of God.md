@@ -67,7 +67,7 @@ Jesus emphasized these emblems when He visited the Nephites anciently[^7]:
 
 ​	May I suggest that we re-evaluate how we approach the Sacrament table. I echo Elder Holland in urging each of us to "come to our services early and reverently, dressed appropriately for participation in a sacred ordinance."
 
-I testify with Alma that "this is the testimony which is in me", that Jesus of Nazareth, the Lamb of God, the Only Begotten of the Father, "t[ook] upon him the pains and the sicknesses", "loosed the bands of death", and filled is bowels with mercy as He "t[ook] upon him our infirmities". He is mighty to save. 
+I testify with Alma that "this is the testimony which is in me", that Jesus of Nazareth, the Lamb of God, the Only Begotten of the Father, "t[ook] upon him the pains and the sicknesses", "loosed the bands of death", and filled His bowels with mercy as He "t[ook] upon him our infirmities". He is mighty to save. 
 
 
 

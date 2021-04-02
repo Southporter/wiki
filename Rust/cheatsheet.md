@@ -362,9 +362,7 @@ fn main() -> Result<(), Box<dyn Error>> {
 }
 ```
 
-
-
-#### Generics
+### Generics
 
 In function signature:
 
@@ -507,7 +505,7 @@ fn gen_article(type: i32) -> impl Summary {
 
 
 
-#### Lifetimes
+### Lifetimes
 
 Lifetimes only apply to references. (i.e. `&str` and `&mut str`)
 
@@ -553,7 +551,7 @@ If after following these rules the compiler still cannot figure it out, it is ki
 
 
 
-#### Testing
+### Testing
 
 ```rust
 #[cfg(test)]
@@ -592,7 +590,7 @@ Running with `--nocapture` will allow the internal output to be seen
 
 
 
-#### Closures
+### Closures
 
 ```rust
 let closure = |arg1, arg2| {
@@ -631,7 +629,9 @@ struct ClosureHolder<T>
 * `FnMut`: Borrows all values mutably: use `move ||` when defining a mutable closure
 * `FnOnce`: Consumes vlaues (takes ownership)
 
-#### Iterators
+
+
+### Iterators
 
 Only requres you to implement the `next` method.
 
@@ -656,7 +656,7 @@ Closures and Iterators are Zero-cost abstractions.
 
 
 
-#### Documentation
+### Documentation
 
 `///` Describes a documentation comment block.
 
@@ -699,6 +699,127 @@ Can prevent future use of a bad versuion with `cargo yank --vers x.x.x`.
 Undo the yank with `cargo yank --vers x.x.x --undo`
 
 
+
+### Workspaces
+
+Allows you to develop multiple related packages in tandem. Like monorepos (npm's lerna)???
+
+Provides one `target` directory for the whole project.
+
+Dependencies are still managed in the packages, but are unified in the workspace. This allows for all packages to be compatible with each other.
+
+Can run cargo command only in one package with the `-p` flag.
+Publishing must be done from each crate's directory.
+
+
+
+### Smart Pointers
+
+Must implement the `Deref` and `Drop` traits
+
+###### Common
+
+* `Box<T>` allocates to the heap
+* `Rc<T>` Counting type, allows multiple ownership
+* `Ref<T>`, `RefMut<T>` enforces borrowing at runtime, not compile time.
+
+###### `Box<T>`
+
+Most simple. No performance overhead. But no extra capabilities.
+
+```rust
+fn main() {
+    let b = Box::new(5); // 5 is on the heap
+    let six = b + 1; // Can reference like a normal variable
+}
+```
+
+Deallocation is automagic with `Box<T>`
+
+###### Custom
+
+```rust
+struct MyPointer<T>(T);
+
+impl<T> MyPointer<T> {
+    fn new(x: T) -> MyPointer<T> {
+        MyPointer(x)
+    }
+}
+
+use std::ops::Deref;
+
+impl<T> Deref for MyPointer<T> {
+    type Target = T;
+    
+    fn deref(&self) -> &T {
+        &self.0
+    }
+}
+
+impl<T> Drop for MyPointer<T> {
+    type Target = T;
+
+    fn drop(&mut self) {
+        // Do something to clean up
+    }
+}
+```
+
+###### Coercion
+
+Rust will coerce any smart reference down to a dereference for us. Allows us to write this:
+
+```rust
+fn hello(name: &str) {
+    println!("Hello, {}!", name);
+}
+```
+
+To work with any smart pointer to a str equivalent.
+
+
+
+###### Drop
+
+You can drop early with `std::mem::drop`
+
+```rust
+use std::mem::drop;
+// --snip
+drop(c);
+```
+
+
+
+#### `Rc<T>`
+
+Counts the references.  Allows multiple ownership.
+
+Use ONLY in single-threaded.
+
+
+
+#### `RefCell<T>`
+
+Allows for mutation of data even if there are immutable references to the data.
+
+Not multiple ownership, only single.
+
+Enforces borrowing at `runtime` not compile time. Causes a panic if you break the rules.
+
+Use ONLY in single-threaded.
+
+Still only allows many immutable borrows OR one mutable borrow at a time. But it is checked at runtime instead.
+
+Other types that provide interior mutability:
+`Cell<T>` and `Mutex<T>`. `Cell<T>` is like `RefCell<T>` except the value is copied in and out. `Mutex<T>` is the thread safe version.
+
+###### Cycles
+
+If you have something similar to `RefCell<Rc<T>>`, you can create cycles. This causes memory leaks. Rust won't catch them. You have to catch them using standard tools.
+
+You can also use `Rc::downgrade` instead of `Rc::clone` to create `Weak<T>` pointers.
 
 
 
